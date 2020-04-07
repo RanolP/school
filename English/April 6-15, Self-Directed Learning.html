@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4월 6일 ~ 15일 자기주도학습 자료</title>
+    <style>
+        /* RESET */
+        html,
+        body {
+            margin: 0;
+        }
+
+        html {
+            font-family: sans-serif;
+            box-sizing: border-box;
+        }
+
+        ul {
+            margin: 0;
+        }
+    </style>
+    <style>
+        body {
+            display: grid;
+            grid-template-columns: 1fr;
+            padding: 2em;
+        }
+
+        table {
+            margin: 0 auto;
+        }
+
+        .left-box,
+        .right-box {
+            padding: 1.2em 1em;
+        }
+
+        .left-box {
+            background-color: hsl(230, 25%, 90%);
+            text-align: center;
+        }
+
+        .right-box {
+            border-left: 0;
+            background-color: hsl(140, 25%, 90%);
+        }
+
+        .right-box>:not(:last-child) {
+            margin-bottom: 0.5em;
+        }
+
+        .english-word {
+            display: block;
+            color: hsl(230, 15%, 15%);
+        }
+
+        .english-pronounciation {
+            display: block;
+            color: hsl(230, 15%, 45%);
+        }
+
+        .english-pronounciation::before {
+            content: '[';
+        }
+
+        .english-pronounciation::after {
+            content: ']';
+        }
+
+        .english-speak {
+            display: block;
+            border: none;
+            background: hsl(230, 25%, 45%);
+            color: hsl(140, 25%, 90%);
+            padding: 0.4em 1em;
+            margin: 1em auto;
+
+            animation: background 0.2s ease-out;
+        }
+
+        .english-speak:hover {
+            background: hsl(230, 25%, 55%);
+        }
+
+        .english-speak:active {
+            background: hsl(230, 25%, 35%);
+        }
+
+        .meaning::before {
+            content: '뜻';
+            background-color: hsl(140, 15%, 25%);
+            color: white;
+            font-weight: bold;
+
+            display: inline-block;
+            width: 1.4em;
+            height: 1.4em;
+            text-align: center;
+            line-height: 1.3em;
+
+            margin-right: 0.4em;
+        }
+
+        .plus-alpha-list {
+            padding-left: 0;
+            counter-reset: plusAlphaList;
+            list-style-type: none;
+        }
+
+        .plus-alpha-list>li {
+            counter-increment: plusAlphaList;
+        }
+
+        .plus-alpha-list::before {
+            content: '플러스 알파';
+            background-color: hsl(140, 15%, 25%);
+            color: white;
+            font-weight: bold;
+
+            display: inline-block;
+            width: 5.4em;
+            height: 1.4em;
+            text-align: center;
+            line-height: 1.3em;
+
+            margin-right: 0.4em;
+        }
+
+        .plus-alpha-meaning {
+            color: hsl(140, 15%, 45%);
+            font-size: 0.8em;
+        }
+
+        .example::before {
+            content: '예문';
+            background-color: hsl(140, 15%, 25%);
+            color: white;
+            font-weight: bold;
+
+            display: block;
+            width: 2.4em;
+            height: 1.4em;
+            text-align: center;
+            line-height: 1.3em;
+
+            margin-right: 0.4em;
+        }
+
+        .example-sentence {
+            display: block;
+        }
+
+        .example-translation {
+            color: hsl(140, 15%, 45%);
+            font-size: 0.8em;
+        }
+
+        .example-highlight {
+            color: hsl(0, 45%, 45%);
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <table>
+        <tbody id="tableBody"></tbody>
+    </table>
+</body>
+
+<script>
+    const t = text => ({
+        highlight: false,
+        text: text.join('')
+    });
+    const highlight = text => ({
+        highlight: true,
+        text: text.join('')
+    });
+
+    // phonetic data from https://tophonetics.com/
+    const wordData = [
+        {
+            englishWord: 'self-quarantining',
+            pronounciation: 'sɛlf-ˈkwɒrəntiːnɪŋ',
+            meaning: '자가 격리',
+            plusAlpha: [
+                {
+                    'word': 'quarantine oneself',
+                    'meaning': '*oneself*를 격리하다'
+                },
+                {
+                    'word': 'in self-isolation',
+                    'meaning': '자가 격리 중인'
+                },
+            ],
+            example: {
+                sentence: [
+                    t`I've been `,
+                    highlight`self-quarantining`,
+                    t` at my house for two weeks.`,
+                ],
+                translation: [
+                    t`저는 집에서 2주간 `,
+                    highlight`자가 격리`,
+                    t` 하고 있어요.`,
+                ],
+            }
+        },
+        {
+            englishWord: 'hold up',
+            pronounciation: 'həʊld ʌp',
+            meaning: '버티다',
+            example: {
+                sentence: [
+                    t`Let me know how you are `,
+                    highlight`holding up`,
+                    t`.`
+                ],
+                translation: [
+                    t`어떻게 `,
+                    highlight`버티고 있는지`,
+                    t` 알려주세요.`
+                ]
+            }
+        },
+        {
+            englishWord: 'is in effect',
+            pronounciation: 'ɪz ɪn ɪˈfɛkt',
+            meaning: '(~이/가) 유효하다.',
+        },
+        {
+            englishWord: 'coronavirus',
+            pronounciation: 'kəˈrəʊnəˈvaɪərəs',
+            meaning: '코로나 바이러스',
+            plusAlpha: [
+                {
+                    'word': 'COVID-19',
+                    'meaning': '2019년부터 유행하기 시작한 코로나 바이러스를 콕 찝어 이르는 말'
+                },
+            ],
+        },
+        {
+            englishWord: 'outbreak',
+            pronounciation: 'ˈaʊtbreɪk',
+            meaning: '발병',
+            example: {
+                sentence: [
+                    t`The `,
+                    highlight`outbreak`,
+                    t` of coronavirus in the United States.`
+                ],
+                translation: [
+                    t`미국에서 코로나바이러스 `,
+                    highlight`발병`,
+                ]
+            }
+        },
+        {
+            englishWord: 'confirmed cases',
+            pronounciation: 'kənˈfɜːmd ˈkeɪsɪz',
+            meaning: '확진자'
+        },
+        {
+            englishWord: 'exponentially',
+            pronounciation: 'ˌɛkspəʊˈnɛnʧəli',
+            meaning: '기하급수적으로',
+            example: {
+                sentence: [
+                    t`The number of confirmed cases is rising `,
+                    highlight`exponentially`,
+                    t`.`
+                ],
+                translation: [
+                    t`확진자의 수가 `,
+                    highlight`기하급수적으로`,
+                    t` 늘고 있습니다.`,
+                ]
+            }
+        },
+        {
+            englishWord: 'social distancing',
+            pronounciation: 'ˈsəʊʃəl ˈdɪstənsɪŋ',
+            meaning: '사회적 거리두기',
+            example: {
+                sentence: [
+                    t`It is critical that the public practice `,
+                    highlight`social distancing`,
+                    t`.`
+                ],
+                translation: [
+                    t`국민들이 `,
+                    highlight`사회적 거리두기`,
+                    t`를 실천하는 것이 매우 중요합니다.`,
+                ]
+            }
+        },
+        {
+            englishWord: 'stay-at-home order',
+            pronounciation: 'ˈsteɪəthəʊm ˈɔːdə',
+            meaning: '외출 금지령',
+            plusAlpha: [
+                {
+                    'word': 'shelter-in-place order',
+                    'meaning': '(현재 있는 곳에서의) 대피 명령'
+                },
+            ],
+            example: {
+                sentence: [
+                    t`The governor issued a state-wide `,
+                    highlight`stay-at-home order`,
+                    t`.`
+                ],
+                translation: [
+                    t`주지사가 주 전지역에 `,
+                    highlight`외출 금지령`,
+                    t`을 내렸다.`,
+                ]
+            }
+        },
+        {
+            englishWord: 'cabin fever',
+            pronounciation: 'ˈkæbɪn ˈfiːvə',
+            meaning: '(집에 너무 오래 있어 느끼는) 답답함'
+        },
+        {
+            englishWord: 'cooped up',
+            pronounciation: 'kuːpt ʌp',
+            meaning: '갇혀있다',
+            plusAlpha: [
+                {
+                    'word': 'coop',
+                    'meaning': '(음식으로 쓰는 새 따위의) 우리'
+                },
+            ],
+            example: {
+                sentence: [
+                    t` I've been `,
+                    highlight`cooped up`,
+                    t` in the house all day long.`
+                ],
+                translation: [
+                    t`집에 하루종일 `,
+                    highlight`갇혀있었어`,
+                    t`.`,
+                ]
+            }
+        },
+        {
+            englishWord: 'hoarding',
+            pronounciation: 'ˈhɔːdɪŋ',
+            meaning: '사재기',
+            plusAlpha: [
+                {
+                    'word': 'panic buying',
+                    'meaning': '공황 속 구매'
+                },
+                {
+                    'word': 'stockpiling',
+                    'meaning': '비축'
+                },
+            ],
+        },
+        {
+            englishWord: 'ration',
+            pronounciation: 'ˈræʃən',
+            meaning: '(~에게) 정량을 배급하다',
+            plusAlpha: [
+                {
+                    'word': 'rationing',
+                    'meaning': '정량 배급'
+                },
+            ],
+            example: {
+                sentence: [
+                    t`Due to hoarding, stores have begun `,
+                    highlight`rationing`,
+                    t` sales of toilet paper.`
+                ],
+                translation: [
+                    t`사재기로 인해 상점들은 휴지를 `,
+                    highlight`일정량만 살 수 있게 합니다`,
+                    t`.`,
+                ]
+            }
+        },
+        {
+            englishWord: 'contagious',
+            pronounciation: 'kənˈteɪʤəs',
+            meaning: '전염성',
+            plusAlpha: [
+                {
+                    'word': 'highly contagious',
+                    'meaning': '전염성이 높은'
+                },
+                {
+                    'word': 'R0 (R naught)',
+                    'meaning': '기초 감염 재생산 수'
+                },
+            ],
+        },
+        {
+            englishWord: 'asymptomatic',
+            pronounciation: 'æˌsɪmptəˈmætɪk',
+            meaning: '무증상인',
+            plusAlpha: [
+                {
+                    'word': 'symptomatic',
+                    'meaning': '증상이 있는'
+                },
+                {
+                    'word': 'symptom',
+                    'meaning': '증상'
+                },
+            ],
+            example: {
+                sentence: [
+                    t`Some people infected with the virus are completely `,
+                    highlight`asymptomatic`,
+                    t`.`
+                ],
+                translation: [
+                    t`바이러스에 걸린 사람들 중 몇은 `,
+                    highlight`증상이 없다`,
+                    t`.`,
+                ]
+            }
+        },
+        {
+            englishWord: 'enough ~ to go around',
+            pronounciation: 'ɪˈnʌf ~ tə gəʊ əˈraʊnd',
+            meaning: '돌아가기에 충분한 ~',
+            plusAlpha: [
+                {
+                    'word': '~ meets the demand',
+                    'meaning': '~은/는 수요를 충족했다'
+                },
+                {
+                    'word': 'no need to hoard ~',
+                    'meaning': '~을/를 비축할 필요 없다.'
+                },
+            ],
+            example: {
+                sentence: [
+                    t`There are still not `,
+                    highlight`enough tests to go around`,
+                    t`.`
+                ],
+                translation: [
+                    t`아직도 `,
+                    highlight`검진량이 충분하지`,
+                    t` 않다.`,
+                ]
+            }
+        },
+        {
+            englishWord: 'flatten the curve',
+            pronounciation: 'ˈflætn ðə kɜːv',
+            meaning: '(통계의 상승 곡선을) 평평하게 하자',
+        },
+        {
+            englishWord: 'out of stock',
+            pronounciation: 'aʊt əv stɒk ',
+            meaning: '품절',
+            plusAlpha: [
+                {
+                    'word': 'sold out',
+                    'meaning': '품절'
+                },
+            ],
+        }
+    ];
+
+    function speak(text) {
+        if (speechSynthesis.speaking) {
+            speechSynthesis.cancel();
+        }
+        const u = new SpeechSynthesisUtterance();
+        u.text = text;
+        u.lang = 'en-US';
+        u.rate = 1.2;
+
+        speechSynthesis.speak(u);
+    }
+
+    function h(tag, { className, children, onClick }) {
+        const element = document.createElement(tag);
+        if (className) {
+            element.classList.add(className);
+        }
+        if (onClick) {
+            element.onclick = onClick;
+        }
+        element.append(...(children || []).filter(Boolean).flat(Infinity));
+        return element;
+    }
+
+    const ITALIC = [/\*[^*]+\*/, text => h('i', { children: [text.substring(1, text.length - 1)] })];
+    const SYNTAXES = [ITALIC];
+    const TinyMarkdown = ({ text }) => {
+        const result = [];
+        outer: while (text.length > 0) {
+            for (const [syntax, nodeCreator] of SYNTAXES) {
+                const match = syntax.exec(text);
+                if (!match) {
+                    continue;
+                }
+                result.push(text.substring(0, match.index));
+                result.push(nodeCreator(match[0]));
+                text = text.substring(match.index + match[0].length, text.length);
+                continue outer;
+            }
+            result.push(text);
+            text = '';
+        }
+
+        return result;
+    }
+
+    const EnglishWord = ({ word }) => h('b', { className: 'english-word', children: [word] });
+    const EnglishPronounciation = ({ pronounciation }) => h('span', { className: 'english-pronounciation', children: [pronounciation] });
+    const SpeakButton = ({ word }) => h('button', { className: 'english-speak', children: ['Listen'], onClick: () => speak(word) });
+
+    const LeftBox = ({ word }) => {
+        return h('td', {
+            className: 'left-box',
+            children: [
+                EnglishWord({ word: word.englishWord }),
+                EnglishPronounciation({ pronounciation: word.pronounciation }),
+                SpeakButton({ word: word.englishWord })
+            ]
+        });
+    }
+
+    const Meaning = ({ meaning }) => h('div', { className: 'meaning', children: [meaning] });
+    const PlusAlpha = ({ word, meaning }) => h('span', {
+        className: 'plus-alpha',
+        children: [
+            h('span', {
+                className: 'plus-alpha-word',
+                children: [word],
+            }),
+            h('span', {
+                className: 'plus-alpha-meaning',
+                children: [TinyMarkdown({ text: meaning })]
+            })
+        ]
+    });
+    const PlusAlphaList = ({ plusAlphaList }) => h(
+        'ul',
+        {
+            className: 'plus-alpha-list',
+            children: plusAlphaList.map(({ word, meaning }) => h(
+                'li',
+                {
+                    children: [PlusAlpha({ word, meaning })]
+                }
+            ))
+        }
+    );
+    const ExampleHighlight = ({ data }) => data.highlight ? h('span', {
+        className: 'example-highlight',
+        children: [data.text],
+    }) : data.text;
+
+    const Example = ({ word, meaning, sentence, translation }) => h('span', {
+        className: 'example',
+        children: [
+            h('span', {
+                className: 'example-sentence',
+                children: sentence.flatMap(data => ExampleHighlight({ data })),
+            }),
+            h('span', {
+                className: 'example-translation',
+                children: translation.flatMap(data => ExampleHighlight({ data })),
+            })
+        ]
+    });
+
+    const RightBox = ({ word }) => {
+        return h('td', {
+            className: 'right-box',
+            children: [
+                Meaning({ meaning: word.meaning }),
+                word.plusAlpha && PlusAlphaList({ plusAlphaList: word.plusAlpha }),
+                word.example && Example({ word: word.englishWord, meaning: word.meaning, sentence: word.example.sentence, translation: word.example.translation })
+            ]
+        });
+    }
+
+    for (const word of wordData) {
+        tableBody.append(h(
+            'tr',
+            {
+                className: 'wrap',
+                children: [LeftBox({ word }), RightBox({ word })]
+            }
+        ));
+    }
+</script>
+
+</html>
