@@ -43,7 +43,6 @@
         }
 
         .right-box {
-            border-left: 0;
             background-color: hsl(140, 25%, 90%);
         }
 
@@ -160,6 +159,21 @@
         .example-highlight {
             color: hsl(0, 45%, 45%);
             text-decoration: underline;
+        }
+    </style>
+    <style>
+        @media print {
+            .english-speak {
+                display: none;
+            }
+
+            table {
+                border-collapse: collapse;
+            }
+
+            td {
+                border: 1px solid black;
+            }
         }
     </style>
 </head>
